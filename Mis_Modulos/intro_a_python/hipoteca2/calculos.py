@@ -10,6 +10,5 @@ def resultado():
     print(f"La cuota mensual es = {pago_mensual}")
 
 
-print(f"Pago total = {importe_total(150000, 15, 4.75)}")
-    
+
 
