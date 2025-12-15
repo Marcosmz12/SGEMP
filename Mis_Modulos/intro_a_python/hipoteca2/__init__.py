@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
-from . import funciones
+from gest_hipoteca import menu
 
