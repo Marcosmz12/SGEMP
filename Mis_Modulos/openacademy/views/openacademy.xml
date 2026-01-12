@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Definición de la vista de lista (Tree/List) -->
+        <record model="ir.ui.view" id="openacademy_list_courses">
+            <field name="name">Courses</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="description"/>
+                </list>
+            </field>
+        </record>
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="course_form_view">
+          <field name="name">course.form</field>
+          <field name="model">openacademy.course</field>
+          <field name="arch" type="xml">
+          <form string="Course Form">
+            <sheet>
+              <group>
+                <field name="name"/>
+              </group>
+              <notebook>
+                <page string="Description">
+                  <field name="description"/>
+                </page>
+                <page string="About">
+                  This is an example of notebooks
+                </page>
+              </notebook>
+            </sheet>
+          </form>
+          </field>
+        </record>
+
+        <record model="ir.ui.view" id="course_search_view">
+          <field name="name">course.search</field>
+          <field name="model">openacademy.course</field>
+          <field name="arch" type="xml">
+          <search>
+            <field name="name"/>
+            <field name="description"/>
+          </search>
+          </field>
+        </record>
+
+        <!-- Acción para abrir la ventana -->
+        <record model="ir.actions.act_window" id="openacademy_action_window_course">
+            <field name="name">Courses</field>
+            <field name="res_model">openacademy.course</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Menú Raíz (El que sale arriba en el tablero) -->
+        <menuitem name="Openacademy" id="openacademy_menu_root"/>
+
+        <!-- Categoría de menú (A la izquierda) -->
+        <menuitem name="Courses" id="openacademy_menu_cursos" parent="openacademy_menu_root"/>
+
+        <!-- Ítem de menú que dispara la acción -->
+        <menuitem name="Courses" id="openacademy_lista_cursos" parent="openacademy_menu_cursos" action="openacademy_action_window_course"/>
+    </data>
+</odoo>
