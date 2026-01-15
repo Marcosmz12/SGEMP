@@ -27,6 +27,7 @@
         'views/templates.xml',
         'views/openacademy.xml',
         'demo/demo.xml',
+        'views/respartner.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

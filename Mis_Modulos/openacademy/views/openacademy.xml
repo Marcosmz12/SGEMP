@@ -21,17 +21,39 @@
             <sheet>
               <group>
                 <field name="name"/>
+                <field name="responsible_id"/>
               </group>
               <notebook>
                 <page string="Description">
                   <field name="description"/>
                 </page>
                 <page string="About">
-                  This is an example of notebooks
+                  <p>This is an example of notebooks</p>
+                </page>
+                <page string="Sessions">
+                <field name="session_ids">
+                <list string="Recorded Sessions">
+                  <field name="name"/>
+                  <field name="instructor_id"/>
+                </list>
+                </field>
                 </page>
               </notebook>
             </sheet>
           </form>
+          </field>
+        </record>
+
+        <!-- override the automatically generated list view for courses -->
+        <record model="ir.ui.view" id="openacademy_list_courses">
+          <field name="name">Courses</field>
+          <field name="model">openacademy.course</field>
+          <field name="arch" type="xml">
+          <list>
+            <field name="name"/>
+            <field name="description"/>
+            <field name="responsible_id"/>
+          </list>
           </field>
         </record>
 
@@ -46,20 +68,69 @@
           </field>
         </record>
 
+        <!-- session form view -->
+        <record model="ir.ui.view" id="session_form_view">
+          <field name="name">session.form</field>
+          <field name="model">openacademy.session</field>
+          <field name="arch" type="xml">
+          <form string="Session Form">
+          <sheet>
+            <group>
+              <group string="General">
+                <field name="course_id"/>
+                <field name="name"/>
+                <field name="instructor_id"/>
+              </group>
+              <group string="Schedule">
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="seats"/>
+              </group>
+            </group>
+            <label for="attendee_ids"/>
+            <field name="attendee_ids"/>
+          </sheet>
+          </form>
+          </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="openacademy_session_list_action">
+          <field name="name">Sessions</field>
+          <field name="res_model">openacademy.session</field>
+          <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- session list view -->
+        <record model="ir.ui.view" id="openacademy_list_session">
+          <field name="name">session.list</field>
+          <field name="model">openacademy.session</field>
+          <field name="arch" type="xml">
+          <list string="Sessions">
+            <field name="name"/>
+            <field name="course_id"/>
+          </list>
+          </field>
+        </record>
+
         <!-- Acción para abrir la ventana -->
         <record model="ir.actions.act_window" id="openacademy_action_window_course">
             <field name="name">Courses</field>
             <field name="res_model">openacademy.course</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">list,form,search</field>
         </record>
 
         <!-- Menú Raíz (El que sale arriba en el tablero) -->
-        <menuitem name="Openacademy" id="openacademy_menu_root"/>
 
         <!-- Categoría de menú (A la izquierda) -->
-        <menuitem name="Courses" id="openacademy_menu_cursos" parent="openacademy_menu_root"/>
 
         <!-- Ítem de menú que dispara la acción -->
-        <menuitem name="Courses" id="openacademy_lista_cursos" parent="openacademy_menu_cursos" action="openacademy_action_window_course"/>
+        <menuitem name="Openacademy" id="openacademy_menu_root">
+          <menuitem name="Courses" id="openacademy_menu_cursos">
+            <menuitem id="openacademy_lista_cursos" action="openacademy_action_window_course"/>
+        </menuitem>
+          <menuitem name="Sessions" id="openacademy_menu_sesiones">
+            <menuitem id="openacademy_lista_sesiones" action="openacademy_session_list_action"/>
+          </menuitem>
+        </menuitem>
     </data>
 </odoo>
