@@ -23,6 +23,14 @@
             <field name="view_mode">list,form</field>
         </record>
 
+        <!-- actions act windows to access contact categories-->
+        <record model="ir.actions.act_window" id="contact_cat_list_action">
+            <field name="name">Contact Category</field>
+            <field name="res_model">res.partner.category</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+
         <!-- Top menu item -->
         <menuitem name="Openacademy" id="openacademy_menu_root">
             <menuitem name="Courses" id="openacademy_menu_cursos">
@@ -35,6 +43,15 @@
 
         <menuitem name="Configuration" id="configuration_menu">
             <menuitem id="openacademy_contact_menu" action="contact_list_action"/>
+            <menuitem id="contact_cat_menu" action="contact_cat_list_action"/>
         </menuitem>
         </menuitem>
+
+        <record model="res.partner.category" id="teacher1">
+            <field name="name">Teacher / Level 1</field>
+        </record>
+        <record model="res.partner.category" id="teacher2">
+            <field name="name">Teacher / Level 2</field>
+        </record>
+
     </odoo>

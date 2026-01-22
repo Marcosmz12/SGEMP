@@ -3,3 +3,5 @@ access_openacademy_course,openacademy.course,model_openacademy_course,base.group
 access_openacademy_session,openacademy.session,model_openacademy_session,base.group_user,1,1,1,1
 access_res_partner_instructor,res.partner.instructor,model_res_partner,base.group_user,1,1,0,0
 access_res_partner_session_ids,res.partner.sessions.ids,model_res_partner,base.group_user,1,1,0,0
+course_read_all,course all,model_openacademy_course,,1,0,0,0
+session_read_all,session all,model_openacademy_session,,1,0,0,0
