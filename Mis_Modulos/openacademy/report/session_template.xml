@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_session_view">
+        <t t-foreach="docs" t-as="session">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <!-- Añadimos un style con margin-top para que el encabezado rosa no tape el texto -->
+                    <div class="page mt-5" style="margin-top: 80px !important;">
+                        
+                        <div class="oe_structure"/>
+
+                        <!-- Título de la Sesión -->
+                        <h2 class="mb-4">
+                            <span class="text-primary">Sesión: </span>
+                            <span t-field="session.name"/>
+                        </h2>
+
+                        <!-- Bloque de Información General -->
+                        <div id="informations" class="row mt-4 mb-4">
+                            <div class="col-4" t-if="session.course_id">
+                                <strong>Curso:</strong>
+                                <div t-field="session.course_id.name" class="text-muted"/>
+                            </div>
+                            <div class="col-4" t-if="session.start_date">
+                                <strong>Fecha Inicio:</strong>
+                                <div t-field="session.start_date" class="text-muted"/>
+                            </div>
+                            <div class="col-4" t-if="session.end_date">
+                                <strong>Fecha Fin:</strong>
+                                <div t-field="session.end_date" class="text-muted"/>
+                            </div>
+                        </div>
+
+                        <div class="oe_structure"/>
+
+                        <!-- Tabla de Asistentes Mejorada -->
+                        <table class="table o_main_table table-sm mt-4" name="session_line_table" style="table-layout: fixed;">
+                            <thead>
+                                <tr style="background-color: #f8f9fa;">
+                                    <!-- Damos el 70% del ancho al nombre para que no se corte -->
+                                    <th name="th_attendee" class="text-start" style="width: 70%; padding: 10px;">
+                                        <span>Nombre del Asistente</span>
+                                    </th>
+                                    <th name="th_status" class="text-end" style="width: 30%; padding: 10px;">
+                                        <span>Estado</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="invoice_tbody">
+                                <t t-foreach="session.attendee_ids" t-as="attendee">
+                                    <tr style="border-bottom: 1px solid #dee2e6;">
+                                        <td name="attendee_name" style="padding: 8px 0;">
+                                            <span t-field="attendee.name"/>
+                                        </td>
+                                        <td class="text-end" style="padding: 8px 0;">
+                                            <span class="badge rounded-pill text-bg-light" style="font-weight: normal; border: 1px solid #ddd;">Registrado</span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Resumen Final -->
+                        <div id="total" class="row mt-4">
+                            <div class="col-7"></div>
+                            <div class="col-5">
+                                <table class="table table-sm table-borderless" style="border-top: 2px solid #333;">
+                                    <tr class="fw-bold">
+                                        <td style="padding: 10px 0;">Total Asistentes</td>
+                                        <td class="text-end" style="padding: 10px 0;">
+                                            <span t-out="len(session.attendee_ids)"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

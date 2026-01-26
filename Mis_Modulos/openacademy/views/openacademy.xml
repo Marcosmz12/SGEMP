@@ -196,6 +196,30 @@
             <field name="view_mode">list,form,calendar,graph,kanban</field>
         </record>
 
+        <!-- Wizard form view -->
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+                <field name="model">openacademy.wizard</field>
+                <field name="arch" type="xml">
+                <form string="Add Attendees">
+                    <group>
+                        <field name="session_id"/>
+                        <field name="attendee_ids"/>
+                    </group>
+                    <footer>
+                        <button name="subscribe" type="object" string="Subscripción" class="oe_highlight"/>
+                        <button special="cancel" string="Cancelar"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="launch_session_wizard">
+            <field name="name">Add Attendees</field>
+            <field name="res_model">openacademy.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
         <!-- 6. MENÚS -->
         <menuitem name="Openacademy" id="openacademy_menu_root">
             <menuitem name="Courses" id="openacademy_menu_cursos">
@@ -203,6 +227,7 @@
             </menuitem>
             <menuitem name="Sessions" id="openacademy_menu_sesiones">
                 <menuitem id="openacademy_lista_sesiones" action="openacademy_session_list_action"/>
+                <menuitem id="openacademy_launch_session_wizard" action="launch_session_wizard"/>
             </menuitem>
         </menuitem>
     </data>
