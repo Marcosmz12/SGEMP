@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sugerencia,sugerencia,model_sugerencias_sugerencia,base.group_user,1,1,1,1
+access_seguimiento,seguimiento,model_sugerencias_seguimiento,base.group_user,1,1,1,1
+access_wizard,wizard,model_sugerencias_wizard,base.group_user,1,1,1,1
